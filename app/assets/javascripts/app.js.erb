@@ -5,18 +5,6 @@
     this.products = gems;
   });
 
-  app.controller('TabController', function(){
-    this.tab = 1;
-
-    this.setTab = function(newValue){
-      this.tab = newValue;
-    };
-
-    this.isSet = function(tabName){
-      return this.tab === tabName;
-    };
-  });
-
   app.controller('GalleryController', function(){
     this.current = 0;
     this.setCurrent = function(newGallery){
@@ -35,21 +23,54 @@
   app.directive('productDescription', function(){
     return {
       restrict: 'E',
-      templateUrl: "product-description.html"
+      templateUrl: "<%= asset_path'product-description.html' %>"
     };
   });
 
   app.directive('productReviews', function(){
     return {
       restrict: 'E',
-      templateUrl: "product-reviews.html"
+      templateUrl: "<%= asset_path'product-reviews.html' %>"
     };
   });
 
   app.directive('productSpecs', function(){
     return {
       restrict: 'A',
-      templateUrl: "product-specs.html"
+      templateUrl: "<%= asset_path'product-specs.html' %>"
+    };
+  });
+
+  app.directive('productTabs', function(){
+    return {
+      restrict: 'E',
+      templateUrl: "<%= asset_path'product-tabs.html' %>",
+      controller: function() {
+        this.tab = 1;
+
+        this.setTab = function(newValue){
+          this.tab = newValue;
+        };
+
+        this.isSet = function(tabName){
+          return this.tab === tabName;
+        };
+      },
+      controllerAs: "tab"
+    };
+  });
+
+  app.directive('productGallery', function(){
+    return {
+      restrict: 'E',
+      templateUrl: "<%= asset_path'product-gallery.html' %>",
+      controller: function() {
+        this.current = 0;
+        this.setCurrent = function(newGallery){
+          this.current = newGallery || 0;
+        };
+      },
+      controllerAs: "gallery"
     };
   });
 
